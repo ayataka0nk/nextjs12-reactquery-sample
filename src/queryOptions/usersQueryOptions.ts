@@ -4,7 +4,11 @@ import { User } from '../types/User'
 export const usersQueryOptions: QueryOptions<User[]> = {
   queryKey: ['/users'],
   queryFn: async () => {
-    const result = await fetch('http://localhost:3000/api/users')
+    const result = await fetch('http://localhost:3000/api/users', {
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
+    })
     return result.json()
   },
 }
