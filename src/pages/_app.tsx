@@ -1,15 +1,26 @@
 import React from 'react'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import dynamic from 'next/dynamic'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = React.useState(() => new QueryClient())
+  const SafeHydrate = dynamic(() => import('../components/SafeHydrate'), {
+    ssr: false,
+  })
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
+      <SafeHydrate>
         <Component {...pageProps} />
-      </Hydrate>
+      </SafeHydrate>
     </QueryClientProvider>
   )
 }
