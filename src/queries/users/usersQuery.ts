@@ -1,7 +1,7 @@
-import { QueryOptions, useQuery } from 'react-query'
-import { User } from '../types/User'
+import { QueryOptions } from 'react-query'
+import { User } from '../../types/User'
 
-export const usersQueryOptions: QueryOptions<User[]> = {
+export const usersQuery: QueryOptions<User[]> = {
   queryKey: ['/users'],
   queryFn: async () => {
     const result = await fetch('http://localhost:3000/api/users', {
