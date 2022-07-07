@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { useQuery } from 'react-query'
-import { usersQuery } from '../../queries/users/usersQuery'
+import { useQueries, useQuery } from 'react-query'
+import { createUsersQueryOptions } from '../../queries/users/usersQuery'
 
 export const Users = () => {
-  const users = useQuery(usersQuery)
+  const [users] = useQueries([createUsersQueryOptions()])
   return (
     <div>
       <div>UsersCard!</div>

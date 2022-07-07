@@ -1,12 +1,16 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useQueryClient } from 'react-query'
 import { Users } from '../../components/users'
-import { usersQuery } from '../../queries/users/usersQuery'
+import { createUsersQueryOptions } from '../../queries/users/usersQuery'
 
 const UsersPage = () => {
   const queryClient = useQueryClient()
-  queryClient.prefetchQuery(usersQuery)
-  const [display, setDisplay] = useState(true)
+
+  useEffect(() => {
+    queryClient.prefetchQuery(createUsersQueryOptions())
+  }, [queryClient])
+
+  const [display, setDisplay] = useState(false)
   const onClick = () => {
     setDisplay((prev) => !prev)
   }

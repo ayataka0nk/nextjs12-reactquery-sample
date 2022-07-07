@@ -1,4 +1,4 @@
-import { InvalidateOptions, QueryOptions, useQueryClient } from 'react-query'
+import { InvalidateOptions, useQueryClient, UseQueryOptions } from 'react-query'
 import { QueryFilters } from 'react-query/types/core/utils'
 import { User } from '../../types/User'
 
@@ -8,7 +8,7 @@ type UserQueryKeys = [path: string, params: { userId: number }]
 
 export const createUserQueryOptions = (
   userId: number
-): QueryOptions<User, unknown, User, UserQueryKeys> => {
+): UseQueryOptions<User, unknown, User, UserQueryKeys> => {
   return {
     queryKey: [userQueryKey, { userId }],
     queryFn: async ({ queryKey }) => {
